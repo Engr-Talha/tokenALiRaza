@@ -59,13 +59,16 @@ function App() {
         process.env.REACT_APP_ABI,
         signer
       );
-      const tx = await ct.buyToken(TokenQuantity, {
-        value: ethers.utils.parseEther((rate * TokenQuantity).toString()),
-        gasLimit: 3000000,
-      });
+      const tx = await ct.buyToken(
+        String(ethers.utils.parseEther(TokenQuantity.toString())), //error line
+        {
+          value: ethers.utils.parseEther((rate * TokenQuantity).toString()),
+          gasLimit: 3000000,
+        }
+      );
       console.log("Transaction receipt:", tx);
     } catch (error) {
-      alert(error.code);
+      alert(error);
     }
   }
   return (
